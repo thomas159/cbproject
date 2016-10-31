@@ -21,20 +21,21 @@ define('VIEWS_DIR',SYSTEM_DIR. '/views');
 
 //config
 require_once(LIB_DIR.'/config.class.php');
-
+//request
+require_once(LIB_DIR.'/request.class.php');
 //router
 require_once(LIB_DIR.'/router.class.php');
 //db
 require_once(LIB_DIR.'/db.class.php');
-
+// view
+require_once(LIB_DIR.'/view.class.php');
 //vendor
 require_once(VENDOR_DIR.'/autoload.php');
 
 // load config of our project
 config::load();
 
-var_dump(config::get('smarty_config_dir'));
-var_dump(config::get('meh'));
+
 
 $smarty = new Smarty();
 $smarty->setTemplateDir(VIEWS_DIR);

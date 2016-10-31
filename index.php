@@ -1,27 +1,24 @@
-<?php 
+<?php
 
-define('DOCROOT',__DIR__);
+define('DOCROOT', __DIR__);
 require(DOCROOT.'/system/config/bootstrap.php');
 
-$controller = router::getController();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title> My Page </title>
-</head>
-<body>
+request::loadRequest();
+$controller_name = router::getControllerName();
 
+$controller_file = router::getControllerFile($controller_name);
 
-<nav>
-  <a href="index.php">Home</a>
-  <a href="index.php?page=contact">Contact form</a>
-  <a href="index.php?page=products">Products</a>
-</nav>
+$controller_class = $controller_name.'_controller';
 
-<?php include($controller); ?>
+// start output buffering
+ob_start();
 
-</body>
-</html>
+// we include the controller that we determined should be used
+include($controller_file);
+
+$controller = new $controller_class();
+$controller->run();
+
+// end output buffering and return the contents of the buffer
+echo ob_get_clean();
 

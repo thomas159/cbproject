@@ -6,7 +6,7 @@ $config = array(
 
   //database
   'db_host' => 'localhost',
-  'db_name' => 'bootcamp',
+  'db_database' => 'bootcamp',
   'db_user' => 'root',
   'db_pass' => '',
   'db_charset' => 'utf8',

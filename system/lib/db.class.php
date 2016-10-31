@@ -8,56 +8,52 @@ class db
   {
     // if static::$pdo was not yet created (ie. connected to the db)
     if(static::$pdo===null) {
-      // connect to the db 
+
+      // connect to the database
+      // store the connection (PDO) into static::$pdo
       static::$pdo = new PDO(
-        'mysql:dbhost='.config::get('db_host').'; dbname='.config::get('db_name').'; charset='.config::get('db_charset'),
+        'mysql:dbname='.config::get('db_database').';host='.config::get('db_host').';charset='.config::get('db_charset', 'utf8'), //'mysql:dbname=database_name;host=locahost;charset=utf8',
         config::get('db_user'),
         config::get('db_pass')
-          );
-       
-     }
-     
-       return static::$pdo;
-      // store the connection into static::$pdo
-    //end if
+      );
+    }
+
+    return static::$pdo;
   }
 
   public static function query($sql)
   {
     $result = static::pdo()->query($sql);
-    if($result===false) {
-      echo 'error';
-      var_dump(static::pdo()->errorInfo());
-      die();
+    if($result === false) 
+    {
+      static::exitWithError();
     }
     return $result;
   }
 
   public static function execute($sql, $substitutions = array())
   {
-    // get PDO connection odbc_fetch_object
+    // get PDO connection object
     $pdo = static::pdo();
 
-    //prepare a statement out of SQL
+    // prepare a statement out of SQL
     $statement = $pdo->prepare($sql);
-
 
     // we run the query and keep the outcome (true or false)
     $outcome = $statement->execute($substitutions);
 
     if($outcome===false)
     {
-    static::exitWithError();
+      static::exitWithError();
     }
+
     return $statement;
   }
 
   protected function exitWithError()
   {
-    echo 'mysql error';
+    echo '<h1>MySQL error:</h1>';
     var_dump(static::pdo()->errorInfo());
     exit();
-
   }
-
 }
