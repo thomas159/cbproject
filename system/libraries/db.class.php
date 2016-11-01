@@ -11,11 +11,16 @@ class db
 
       // connect to the database
       // store the connection (PDO) into static::$pdo
-      static::$pdo = new PDO(
-        'mysql:dbname='.config::get('db_database').';host='.config::get('db_host').';charset='.config::get('db_charset', 'utf8'), //'mysql:dbname=database_name;host=locahost;charset=utf8',
-        config::get('db_user'),
-        config::get('db_pass')
-      );
+      try {
+        static::$pdo = new PDO(
+          'mysql:dbname='.config::get('db_database').';host='.config::get('db_host').';charset='.config::get('db_charset', 'utf8'), //'mysql:dbname=database_name;host=locahost;charset=utf8',
+          config::get('db_user'),
+          config::get('db_pass')
+        );
+        static::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      } catch (PDOException $e) {
+          echo 'Connection failed: ' . $e->getMessage();
+      }
     }
 
     return static::$pdo;

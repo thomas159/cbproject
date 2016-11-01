@@ -1,3 +1,1 @@
-<?php echo $heading; ?><br />
-<?php echo $menu; ?>
-Current timestamp: <?php echo time(); ?>
+&copy; 2016 Jan Polak

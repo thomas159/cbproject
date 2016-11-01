@@ -1,6 +1,6 @@
 <?php
 
-class homepage_controller
+class product_controller
 {
 
   public function run()
@@ -17,16 +17,9 @@ class homepage_controller
     $results = db::execute($query);
     $homepage->top_products->products = $results;
     
-
-    // Categories
     $categories = new view('homepage/categories');
-    $query = "Select * FROM category ORDER BY 'name' ASC";
-    $results = db::execute($query);
-    $categories->categories = $results;
-    $homepage->categories = $categories;
+    $homepage->categories = 'CATEGORIES';
 
-
-    // shop info
     $homepage->shop_info = 'SHOP_INFO';
 
     presenter::present($homepage);
