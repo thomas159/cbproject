@@ -6,15 +6,7 @@ class router
   public static function getControllerName()
   {
     // we get the page name from $_GET
-    if(isset($_GET['page'])) // if there is a value with the name 'page' in the URL
-    {
-      $page = $_GET['page']; // initialize the variable $page with that value
-    } 
-    else // in other case
-    {
-      $page = 'homepage'; // initialize the variable $page with the value 'homepage'
-    }
-
+    $page = request::get('page', 'homepage');    
 
     // if a controller file exists with this name
     $file_name = $page . '.controller.php';
@@ -29,6 +21,24 @@ class router
       // return the path to the error 404 file
       return 'error404';
     }
+  }
+
+  public static function runController($controller_name)
+  {
+    // get the file path
+    $controller_file = router::getControllerFile($controller_name);
+
+    // get the name of the class
+    $controller_class = $controller_name.'_controller';
+
+    // we include the controller file
+    include($controller_file);
+
+    // create the controller object
+    $controller = new $controller_class();
+
+    // run the controller!
+    $controller->run();
   }
 
   public static function getControllerFile($controller_name)

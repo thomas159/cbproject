@@ -7,7 +7,9 @@ class homepage_controller
   {
     $homepage = new view('homepage/homepage');
 
-    $homepage->top_products = new view('homepage/top_products');
+
+    // TOP PRODUCTS
+    $top_products = new view('homepage/top_products');
     $query = "
       SELECT `product`.*
       FROM `product`
@@ -15,19 +17,29 @@ class homepage_controller
       ORDER BY `product`.`name` ASC
     ";
     $results = db::execute($query);
-    $homepage->top_products->products = $results;
+    $top_products->products = $results;
+    $homepage->top_products = $top_products;
     
 
-    // Categories
-    $categories = new view('homepage/categories');
-    $query = "Select * FROM category ORDER BY 'name' ASC";
+    // CATEGORIES
+    $categories_view = new view('homepage/categories');
+    $query = "
+      SELECT `category`.*
+      FROM `category`
+      WHERE `category`.`parent_id` IS NULL
+      ORDER BY `category`.`name` ASC
+    ";
+    // select data from database
     $results = db::execute($query);
-    $categories->categories = $results;
-    $homepage->categories = $categories;
+    // put the data in the view 
+    $categories_view->categories = $results;
+    // put the view in the homepage view
+    $homepage->categories = $categories_view;
 
 
-    // shop info
-    $homepage->shop_info = 'SHOP_INFO';
+    // SHOP INFO
+    $shop_info_view = new view('homepage/shop_info');
+    $homepage->shop_info = $shop_info_view;
 
     presenter::present($homepage);
   }

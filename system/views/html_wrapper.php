@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>My eshop</title>
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+  <link rel="stylesheet" href="css/main.css" />
+
 </head>
 <body>
 
   <?php
+
   // print the contents of the output buffer
   echo $content;
+
   ?>
 
 </body>
