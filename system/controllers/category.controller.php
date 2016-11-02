@@ -9,6 +9,10 @@ class category_controller
     // we get the category uri from URL
     $category_uri = request::get('category', null);
 
+
+
+
+
     // if category uri was found in the URL, try to find that category
     if($category_uri)
     {
@@ -30,16 +34,41 @@ class category_controller
         router::runController('error404');
         return;
       }
-      else
-      {
-        // we have a category
-        $info_view = new view('category/category_info');
-        $info_view->category = $category;
-        $layout->category_info = $info_view;
+    }
+    else
+    {
+      $category = null;
+    }
 
-        // select the subcategories and print them
-        $subcategories_view = new view('category/subcategories');
-        $query = "
+
+
+
+
+
+    // prepare the info
+    if($category!=null) // if a category was found
+    {
+      $info_view = new view('category/category_info');
+      $info_view->category = $category;
+      $layout->category_info = $info_view; // we put the $info_view view into $layout
+    }
+    else
+    {
+      // we don't create the category_info view
+      // in layout.php we will have to check if $category_info is set
+    }
+
+
+
+
+
+
+    // subcategories OR top categories
+    $subcategories_view = new view('category/subcategories');
+    if($category!=null) // if a category was found
+    {
+      // prepare the SUBcategories query & substitutions
+      $query = "
           SELECT `category`.*
           FROM `category`
           WHERE `category`.`parent_id` = :category_id
@@ -48,15 +77,25 @@ class category_controller
         $substitutions = array(
           ':category_id' => $category['id']
         );
-        $results = db::execute($query, $substitutions);
-        $subcategories_view->categories = $results;
-        $layout->subcategories = $subcategories_view;
-      }
     }
-    else
+    else // if no category was set
     {
-       // print the detail of the whole eshop
+      // prepare the TOP categories query & substitutions
+      $query = "
+          SELECT `category`.*
+          FROM `category`
+          WHERE `category`.`parent_id` IS NULL
+          ORDER BY `category`.`name` ASC
+        ";
+        $substitutions = array();
     }
+    $results = db::execute($query, $substitutions);
+    $subcategories_view->categories = $results;
+    $layout->subcategories = $subcategories_view;
+
+
+
+    
 
 
     presenter::present($layout);
