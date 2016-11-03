@@ -29,6 +29,8 @@ require_once(LIBRARIES_DIR.'/router.class.php');
 // view
 require_once(LIBRARIES_DIR.'/view.class.php');
 
+// vendor autoload
+require_once(VENDOR_DIR.'/autoload.php');
 
 // load the configuration of our project
 config::load();

@@ -1,7 +1,9 @@
 ESHOP
   * determine what page to show
+
   print page wrapper
       * print header
+
         print search field
       * print navbar
       * print footer
@@ -48,3 +50,65 @@ HOMEPAGE
     1) create a view with the shop info in it
     2) render the view
     3) put it into the homepage layout
+
+category (product_list)
+--------------------------
+1) user clicks link to get to this page
+2) category comes from user click and is in the URL
+3) we run the run() method of the category controller class
+4) create a new view for the products_list page
+5) determine the category the user wants to see
+5) category info
+    - select the category from database
+    1)category name
+    2) category description
+6) sub categories
+    - select the sub categories from database
+    1) select sub_categories
+    2) make a view
+    3) put the view into the category layout and render
+7) list of products in this category
+    1) select products
+    2) make a view
+    3) put products in the view
+    4) put view into category layout and render it
+
+Product Detail Page
+----------------------------
+1) user arrives via url
+2) determine the page via the router class
+3) run the run() method of the product_controller
+4) create a new view for the product's layout
+5) determine which product the user wants to see
+    if not product is selected we end with 404
+    -select the product from the database *
+    - sleect main image
+    -create a template for product info and put it in there
+        -product name
+        - first of products images
+        -product description
+        -product params
+    -create a template for product gallery
+        - select the rest of the product images from database
+    -product images
+    -order form
+
+
+
+
+this could be used in the bootstrap.php to require all of the libraries
+
+
+<?php
+
+$folder= __DIR__;
+$files = scandir($folder);
+foreach($files as $file){
+if ($file == '.' || '..') continue;
+
+if (is_dir($folder.'/'.$file))
+{
+    //do stuff with folder
+} else {
+    //do stuff with file
+}

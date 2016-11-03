@@ -1,7 +1,3 @@
-<div class="shop_info">
-  <?php echo $shop_info; ?>
-</div>
-
 <div class="top_products">
   <?php echo $top_products; ?>
 </div>
@@ -10,3 +6,6 @@
   <?php echo $categories; ?>
 </div>
 
+<div class="shop_info">
+  <?php echo $shop_info; ?>
+</div>

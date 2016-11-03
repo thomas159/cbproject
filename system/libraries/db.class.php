@@ -22,9 +22,9 @@ class db
           echo 'Connection failed: ' . $e->getMessage();
       }
     }
+
     return static::$pdo;
   }
-
 
   public static function query($sql)
   {

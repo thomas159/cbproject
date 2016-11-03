@@ -19,8 +19,8 @@
 
 
 
-  <div id="footer">
+  <footer id="footer">
     <?php echo $footer; ?>
-  </div>
+  </footer>
 
 </div>

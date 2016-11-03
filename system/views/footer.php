@@ -1,1 +1,1 @@
-&copy; 2016 Jan Polak
+<center>&copy; 2016 Brady Maxwell</center>

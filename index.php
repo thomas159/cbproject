@@ -10,7 +10,7 @@ $controller_name = router::getControllerName();
 ob_start();
 
 router::runController($controller_name);
-
+//var_dump($controller);
 // end output buffering and return the contents of the buffer
 echo ob_get_clean();
 

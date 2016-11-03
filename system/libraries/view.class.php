@@ -2,8 +2,6 @@
 
 class view
 {
- 
-
   protected $template_name = null;
 
   protected $template_variables = array();
@@ -15,13 +13,12 @@ class view
 
   public function __toString()
   {
-    return $this->render(false);
+      return $this->render(false);
   }
 
   public function render($print = true)
   {
     $rendered_content = $this->getRenderedContent();
-
     if($print)
     {
       echo $rendered_content;
@@ -36,11 +33,13 @@ class view
   {
     ob_start();
 
-    extract($this->template_variables);
-    
+          extract($this->template_variables);
+
     include(VIEWS_DIR . '/' . $this->template_name . '.php');
 
     // return the contents of the right template based on $this->template_name
+
+
     return ob_get_clean();
   }
 

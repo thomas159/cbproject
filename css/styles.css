@@ -1,0 +1,41 @@
+#header {
+    background-color: #333333;
+    height: 5em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: green;
+}
+
+#category_list{
+    list-style: none;
+}
+#content {
+    background-color: silver;
+    padding: 2em;
+    box-sizing: border-box;
+}
+
+#content p {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: red;
+}
+body{
+    text-align: center;
+}
+img .gallery_image {
+    width:140px;
+    height: 100px;
+}
+.topprdimg img {
+    width:140px;
+    height: 100px;
+    float: left;
+}
+
+#footer {
+    bottom: 0;
+    height: 2em;
+    width: 1110px;
+    position: fixed;
+    background-color: #333333;
+    color: green;
+}

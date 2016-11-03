@@ -1,0 +1,54 @@
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+#header {
+  background-color: #333333;
+  color: #ffffff;
+  height: 5em;
+}
+
+#content {
+  background-color: silver;
+  padding: 2em;
+  box-sizing: border-box;
+}
+
+#header {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: green;
+}
+
+#content p {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: red;
+}
+
+#content .second {
+  color: blue;
+}
+
+body #content p.first {
+  color: brown;
+}
+
+#footnote {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#content #footnote {
+  color: orange;
+}
+/* Write your own style beyond this point */
+/*change the css below with precedents*/
+
+body,
+#header,
+#content #first,
+body #content #footnote,
+body #content p.first,
+body #content p.second {
+  font-fmaily: arial;
+  color: black;
+}

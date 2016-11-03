@@ -5,47 +5,45 @@ class homepage_controller
 
   public function run()
   {
+      //create the $homepage from the view class
     $homepage = new view('homepage/homepage');
 
-
-    // TOP PRODUCTS
-    $top_products = new view('homepage/top_products');
+    // top products get them and add them to the $homepage view
+    $homepage->top_products = new view('homepage/top_products');
     $query = "
-      SELECT `product`.*
-      FROM `product`
-      WHERE `product`.`is_top` = 1
-      ORDER BY `product`.`name` ASC
+      SELECT product.name, product.price, product_image.filename as filename, product_image.product_id as product_id
+FROM product
+INNER JOIN product_image
+ON product.id=product_image.product_id
+where product.is_top = 1 and product_image.order=1
+ORDER BY product.name ASC
     ";
     $results = db::execute($query);
-    $top_products->products = $results;
-    $homepage->top_products = $top_products;
-    
+    $homepage->top_products->products = $results;
 
-    // CATEGORIES
-    $categories_view = new view('homepage/categories');
-    $query = "
+    // end top products
+
+    // categories get them and add them to the home page view
+    $homepage->categories = new view('homepage/categories');
+      $query = "
       SELECT `category`.*
       FROM `category`
-      WHERE `category`.`parent_id` IS NULL
+       WHERE parent_id is NULL 
       ORDER BY `category`.`name` ASC
+     
     ";
-    // select data from database
-    $results = db::execute($query);
-    // put the data in the view 
-    $categories_view->categories = $results;
-    // put the view in the homepage view
-    $homepage->categories = $categories_view;
+      $results = db::execute($query);
+      $homepage->categories->category = $results;
+
+    // end categories
 
 
-    // SHOP INFO
-    $shop_info_view = new view('homepage/shop_info');
-    $homepage->shop_info = $shop_info_view;
+    // start shop info section of homepage
+    $homepage->shop_info = new view('homepage/shop_info');
 
     presenter::present($homepage);
   }
 
 }
-
-
 
 ?>
